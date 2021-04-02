@@ -1,3 +1,4 @@
+import 'package:app_calculadora/components/ajuda.dart';
 import 'package:flutter/material.dart';
 
 class CalculadoraPage extends StatefulWidget {
@@ -119,7 +120,10 @@ class _CalculadoraPageState extends State<CalculadoraPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   RaisedButton(
-                    child: Text('Calcular'),
+                    child: Text(
+                      'Calcular',
+                      style: TextStyle(fontSize: 20),
+                    ),
                     color: Colors.blue,
                     textColor: Colors.white,
                     onPressed: () {
@@ -129,13 +133,19 @@ class _CalculadoraPageState extends State<CalculadoraPage> {
                   RaisedButton(
                     color: Colors.red,
                     textColor: Colors.white,
-                    child: Text('Limpar'),
+                    child: Text(
+                      'Limpar',
+                      style: TextStyle(fontSize: 20),
+                    ),
                     onPressed: () {
                       _resetForm();
                     },
                   ),
                   RaisedButton(
-                    child: Text('Ajuda'),
+                    child: Text(
+                      'Ajuda',
+                      style: TextStyle(fontSize: 20),
+                    ),
                     color: Colors.green,
                     textColor: Colors.white,
                     onPressed: () {
@@ -174,31 +184,11 @@ class _CalculadoraPageState extends State<CalculadoraPage> {
   _ajuda(BuildContext context) {
     showDialog(
       context: context,
-      child: AlertDialog(
-        actionsPadding: EdgeInsets.symmetric(horizontal: 10),
-        title: Text('Ajuda'),
-        content: Text(
-          '''
+      child: Ajuda(
+        texto: '''
           A----B
           C----X
           X=(B*C)/A''',
-          // textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 20,
-          ),
-        ),
-        actions: [
-          RaisedButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            color: Colors.blue,
-            textColor: Colors.white,
-            child: Text(
-              'Fechar',
-            ),
-          )
-        ],
       ),
     );
   }

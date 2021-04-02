@@ -1,5 +1,7 @@
+import 'package:app_calculadora/components/ajuda.dart';
+import 'package:app_calculadora/utils/calculadora.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
+// import 'dart:math';
 
 class PerimetroCirculo extends StatefulWidget {
   @override
@@ -129,7 +131,8 @@ class _PerimetroCirculoState extends State<PerimetroCirculo> {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       num campoValorRaio = num.parse(_formData['campo_valor']);
-      num resultado = 2 * pi * campoValorRaio;
+      // num resultado = 2 * pi * campoValorRaio;
+      num resultado = Calculadora.perimetroCirculo(campoValorRaio);
       String resultadoFormatado = resultado.toStringAsFixed(2);
       String resultadoArredondado = resultado.round().toString();
       setState(() {
@@ -144,28 +147,8 @@ class _PerimetroCirculoState extends State<PerimetroCirculo> {
   _ajuda(BuildContext context) {
     showDialog(
       context: context,
-      child: AlertDialog(
-        actionsPadding: EdgeInsets.symmetric(horizontal: 10),
-        title: Text('Ajuda'),
-        content: Text(
-          'P=2*pi*r',
-          // textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 20,
-          ),
-        ),
-        actions: [
-          RaisedButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            color: Colors.blue,
-            textColor: Colors.white,
-            child: Text(
-              'Fechar',
-            ),
-          )
-        ],
+      child: Ajuda(
+        texto: 'P=2*pi*r',
       ),
     );
   }

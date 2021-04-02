@@ -1,5 +1,7 @@
-import 'dart:math';
+// import 'dart:math';
 
+import 'package:app_calculadora/components/ajuda.dart';
+import 'package:app_calculadora/utils/calculadora.dart';
 import 'package:flutter/material.dart';
 
 class TeoremaPitagorasPage extends StatefulWidget {
@@ -103,7 +105,10 @@ class _TeoremaPitagorasPageState extends State<TeoremaPitagorasPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   RaisedButton(
-                    child: Text('Calcular'),
+                    child: Text(
+                      'Calcular',
+                      style: TextStyle(fontSize: 20),
+                    ),
                     color: Colors.blue,
                     textColor: Colors.white,
                     onPressed: () {
@@ -113,13 +118,19 @@ class _TeoremaPitagorasPageState extends State<TeoremaPitagorasPage> {
                   RaisedButton(
                     color: Colors.red,
                     textColor: Colors.white,
-                    child: Text('Limpar'),
+                    child: Text(
+                      'Limpar',
+                      style: TextStyle(fontSize: 20),
+                    ),
                     onPressed: () {
                       _resetForm();
                     },
                   ),
                   RaisedButton(
-                    child: Text('Ajuda'),
+                    child: Text(
+                      'Ajuda',
+                      style: TextStyle(fontSize: 20),
+                    ),
                     color: Colors.green,
                     textColor: Colors.white,
                     onPressed: () {
@@ -142,25 +153,53 @@ class _TeoremaPitagorasPageState extends State<TeoremaPitagorasPage> {
       num cateto1 = num.parse(_formData['cateto_1']);
       num cateto2 = num.parse(_formData['cateto_2']);
       num hipotenusa = num.parse(_formData['hipotenusa']);
-      num resultado = 0;
 
-      if (cateto1 == 0) {
-        resultado = sqrt(pow(hipotenusa, 2) - pow(cateto2, 2));
-        nomeCampo = 'Cateto 1';
-      } else if (cateto2 == 0) {
-        nomeCampo = 'Cateto 2';
-        resultado = sqrt(pow(hipotenusa, 2) - pow(cateto1, 2));
-      } else if (hipotenusa == 0) {
-        nomeCampo = 'Hipotenusa';
-        resultado = sqrt(pow(cateto1, 2) + pow(cateto2, 2));
-      } else {
-        nomeCampo = '';
-        resultado = 0;
-      }
+      // if (cateto1 == 0) {
+      //   resultado = sqrt(pow(hipotenusa, 2) - pow(cateto2, 2));
+      //   nomeCampo = 'Cateto 1';
+      // } else if (cateto2 == 0) {
+      //   nomeCampo = 'Cateto 2';
+      //   resultado = sqrt(pow(hipotenusa, 2) - pow(cateto1, 2));
+      // } else if (hipotenusa == 0) {
+      //   nomeCampo = 'Hipotenusa';
+      //   resultado = sqrt(pow(cateto1, 2) + pow(cateto2, 2));
+      // } else {
+      //   nomeCampo = '';
+      //   resultado = 0;
+      // }
 
-      String resultadoFormatado = resultado.toStringAsFixed(2);
-      String resultadoArredondado = resultado.round().toString();
+      // String resultadoFormatado = resultado.toStringAsFixed(2);
+      // String resultadoArredondado = resultado.round().toString();
+
+      // Map<dynamic, dynamic> resultado = Calculadora.teoremaDePitagoras(
+      //     cateto1: cateto1, cateto2: cateto2, hipotenusa: hipotenusa);
+      dynamic resultado;
+      dynamic resultadoFormatado;
+      dynamic resultadoArredondado;
+
+      List<dynamic> calculo = Calculadora.teoremaDePitagoras2(
+          cateto1: cateto1, cateto2: cateto2, hipotenusa: hipotenusa);
+
       setState(() {
+        // _resultadoLabel = 'Resultado: $nomeCampo';
+        // _valor = '$resultado -> $resultadoFormatado -> $resultadoArredondado';
+        // return _valor;
+        //
+        // for (var item in resultado.keys) {
+        //   resultadoFormatado = resultado[item].toStringAsFixed(2);
+        //   resultadoArredondado = resultado[item].round().toString();
+        //   nomeCampo = item;
+
+        //   _resultadoLabel = 'Resultado: $nomeCampo';
+        //   _valor =
+        //       '${resultado[item]} -> $resultadoFormatado -> $resultadoArredondado';
+        // }
+
+        nomeCampo = calculo[0];
+        resultado = calculo[1];
+        resultadoFormatado = resultado.toStringAsFixed(2);
+        resultadoArredondado = resultado.round().toString();
+
         _resultadoLabel = 'Resultado: $nomeCampo';
         _valor = '$resultado -> $resultadoFormatado -> $resultadoArredondado';
         return _valor;
@@ -171,28 +210,8 @@ class _TeoremaPitagorasPageState extends State<TeoremaPitagorasPage> {
   _ajuda(BuildContext context) {
     showDialog(
       context: context,
-      child: AlertDialog(
-        actionsPadding: EdgeInsets.symmetric(horizontal: 10),
-        title: Text('Ajuda'),
-        content: Text(
-          'Hipotenusa^2=Cateto1^2+Cateto2^2',
-          // textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 20,
-          ),
-        ),
-        actions: [
-          RaisedButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            color: Colors.blue,
-            textColor: Colors.white,
-            child: Text(
-              'Fechar',
-            ),
-          )
-        ],
+      child: Ajuda(
+        texto: 'Hipotenusa^2=Cateto1^2+Cateto2^2',
       ),
     );
   }
