@@ -29,9 +29,9 @@ class Calculadora {
     return resultado;
   }
 
-  static String formatadorFinal(num valor, num resultado, String nome_medida) {
+  static String formatadorFinal(num valor, num resultado, String nomeMedida) {
     return formataCalculo([
-      nome_medida,
+      nomeMedida,
       valor.toString(),
       resultado.toString(),
       resultado.round().toString()
