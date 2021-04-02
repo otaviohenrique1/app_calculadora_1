@@ -12,7 +12,7 @@ class _CalculadoraPageState extends State<CalculadoraPage> {
   String _valor = '0';
   final campoNomeController = TextEditingController();
   final campoBController = TextEditingController();
-  String _campoVazio = "Campo vazio";
+  String _campoVazioMensagem = "Campo vazio";
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class _CalculadoraPageState extends State<CalculadoraPage> {
                 // ignore: missing_return
                 validator: (value) {
                   if (value.isEmpty) {
-                    return _campoVazio;
+                    return _campoVazioMensagem;
                   }
                 },
                 onSaved: (value) {
@@ -50,7 +50,7 @@ class _CalculadoraPageState extends State<CalculadoraPage> {
                 // ignore: missing_return
                 validator: (value) {
                   if (value.isEmpty) {
-                    return _campoVazio;
+                    return _campoVazioMensagem;
                   }
                 },
                 onSaved: (value) {
@@ -67,7 +67,7 @@ class _CalculadoraPageState extends State<CalculadoraPage> {
                 // ignore: missing_return
                 validator: (value) {
                   if (value.isEmpty) {
-                    return _campoVazio;
+                    return _campoVazioMensagem;
                   }
                 },
                 onSaved: (value) {
@@ -83,7 +83,7 @@ class _CalculadoraPageState extends State<CalculadoraPage> {
                 // ignore: missing_return
                 validator: (value) {
                   if (value.isEmpty) {
-                    return _campoVazio;
+                    return _campoVazioMensagem;
                   }
                 },
                 onSaved: (value) {
@@ -168,9 +168,11 @@ class _CalculadoraPageState extends State<CalculadoraPage> {
       num campoA = num.parse(_formData['campo_a']);
       num campoB = num.parse(_formData['campo_b']);
       num campoC = num.parse(_formData['campo_c']);
+
       num resultado = (campoB * campoC) / campoA;
       String resultadoFormatado = resultado.toStringAsFixed(2);
       String resultadoArredondado = resultado.round().toString();
+
       setState(() {
         _valor =
             '$nome -> $campoB -> $resultadoFormatado -> $resultadoArredondado';
