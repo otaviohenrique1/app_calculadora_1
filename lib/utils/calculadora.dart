@@ -16,14 +16,6 @@ class Calculadora {
     return mensagemCalculadoraAjuda;
   }
 
-  static num perimetroCirculo(num valor) {
-    return (2 * pi * valor);
-  }
-
-  static num teoremaDePitagoras(num cateto1, num cateto2) {
-    return sqrt((pow(cateto1, 2) + pow(cateto2, 2)));
-  }
-
   static String formataCalculo(List<String> valor) {
     var resultado = valor.join(' -> ');
     return resultado;
@@ -44,4 +36,80 @@ class Calculadora {
           value, Calculadora.calculaMedida(a, b, value), key));
     });
   }
+
+  static num perimetroCirculo(num valor) {
+    return (2 * pi * valor);
+  }
+
+  static Map<dynamic, dynamic> teoremaDePitagoras2({
+    num cateto1 = 0,
+    num cateto2 = 0,
+    num hipotenusa = 0,
+  }) {
+    num resultado = 0;
+    String nomeCampo = '';
+
+    // Map<dynamic, dynamic> campos = {
+    //   '_cateto1': 'cateto_1',
+    //   '_cateto2': 'cateto_2',
+    //   '_hipotenusa': 'hipotenusa',
+    // };
+
+    if (cateto1 == 0) {
+      nomeCampo = 'Cateto 1';
+      resultado = sqrt(pow(hipotenusa, 2) - pow(cateto2, 2));
+      return {
+        'nomeCampo': nomeCampo,
+        'resultado': resultado,
+      };
+    } else if (cateto2 == 0) {
+      nomeCampo = 'Cateto 2';
+      resultado = sqrt(pow(hipotenusa, 2) - pow(cateto1, 2));
+      return {
+        'nomeCampo': nomeCampo,
+        'resultado': resultado,
+      };
+    } else if (hipotenusa == 0) {
+      nomeCampo = 'Hipotenusa';
+      resultado = sqrt(pow(cateto1, 2) + pow(cateto2, 2));
+      return {
+        'nomeCampo': nomeCampo,
+        'resultado': resultado,
+      };
+    }
+    // nomeCampo = '';
+    return {
+      'nomeCampo': '',
+      'resultado': 0,
+    };
+  }
+
+  static num teoremaDePitagoras({
+    num cateto1 = 0,
+    num cateto2 = 0,
+    num hipotenusa = 0,
+  }) {
+    num resultado = 0;
+
+    if (cateto1 == 0) {
+      // nomeCampo = 'Cateto 1';
+      resultado = sqrt(pow(hipotenusa, 2) - pow(cateto2, 2));
+      return resultado;
+    } else if (cateto2 == 0) {
+      // nomeCampo = 'Cateto 2';
+      resultado = sqrt(pow(hipotenusa, 2) - pow(cateto1, 2));
+      return resultado;
+    } else if (hipotenusa == 0) {
+      // nomeCampo = 'Hipotenusa';
+      resultado = sqrt(pow(cateto1, 2) + pow(cateto2, 2));
+      return resultado;
+    }
+    // nomeCampo = '';
+    return resultado;
+  }
+}
+
+main(List<String> args) {
+  num x = Calculadora.teoremaDePitagoras(cateto1: 3, cateto2: 4);
+  print(x);
 }

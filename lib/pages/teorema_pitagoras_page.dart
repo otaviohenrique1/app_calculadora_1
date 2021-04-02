@@ -12,6 +12,7 @@ class _TeoremaPitagorasPageState extends State<TeoremaPitagorasPage> {
   Map<dynamic, dynamic> _formData = {};
   String _valor = '0';
   String _campoVazio = "Campo vazio";
+  String _resultadoLabel = 'Resultado:';
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +39,6 @@ class _TeoremaPitagorasPageState extends State<TeoremaPitagorasPage> {
                 },
                 onSaved: (value) {
                   _formData["cateto_1"] = value;
-                  if (_formData["cateto_1"] == 0) {
-                    _formData["nome_campo"] = "cateto_1";
-                  }
                 },
               ),
             ),
@@ -57,9 +55,6 @@ class _TeoremaPitagorasPageState extends State<TeoremaPitagorasPage> {
                 },
                 onSaved: (value) {
                   _formData["cateto_2"] = value;
-                  if (_formData["cateto_2"] == 0) {
-                    _formData["nome_campo"] = "cateto_2";
-                  }
                 },
               ),
             ),
@@ -76,9 +71,6 @@ class _TeoremaPitagorasPageState extends State<TeoremaPitagorasPage> {
                 },
                 onSaved: (value) {
                   _formData["hipotenusa"] = value;
-                  if (_formData["hipotenusa"] == 0) {
-                    _formData["nome_campo"] = "hipotenusa";
-                  }
                 },
               ),
             ),
@@ -88,7 +80,7 @@ class _TeoremaPitagorasPageState extends State<TeoremaPitagorasPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Resultado:',
+                    _resultadoLabel,
                     style: TextStyle(
                       fontSize: 20,
                     ),
@@ -146,7 +138,7 @@ class _TeoremaPitagorasPageState extends State<TeoremaPitagorasPage> {
   _calcular() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      String nomeCampo = _formData['nome_campo'];
+      String nomeCampo = '';
       num cateto1 = num.parse(_formData['cateto_1']);
       num cateto2 = num.parse(_formData['cateto_2']);
       num hipotenusa = num.parse(_formData['hipotenusa']);
@@ -154,19 +146,23 @@ class _TeoremaPitagorasPageState extends State<TeoremaPitagorasPage> {
 
       if (cateto1 == 0) {
         resultado = sqrt(pow(hipotenusa, 2) - pow(cateto2, 2));
+        nomeCampo = 'Cateto 1';
       } else if (cateto2 == 0) {
+        nomeCampo = 'Cateto 2';
         resultado = sqrt(pow(hipotenusa, 2) - pow(cateto1, 2));
       } else if (hipotenusa == 0) {
+        nomeCampo = 'Hipotenusa';
         resultado = sqrt(pow(cateto1, 2) + pow(cateto2, 2));
       } else {
+        nomeCampo = '';
         resultado = 0;
       }
 
       String resultadoFormatado = resultado.toStringAsFixed(2);
       String resultadoArredondado = resultado.round().toString();
       setState(() {
-        _valor =
-            '$nomeCampo -> $resultado -> $resultadoFormatado -> $resultadoArredondado';
+        _resultadoLabel = 'Resultado: $nomeCampo';
+        _valor = '$resultado -> $resultadoFormatado -> $resultadoArredondado';
         return _valor;
       });
     }
@@ -204,6 +200,7 @@ class _TeoremaPitagorasPageState extends State<TeoremaPitagorasPage> {
   _resetForm() {
     setState(() {
       _valor = "0";
+      _resultadoLabel = 'Resultado:';
     });
     _formKey.currentState.reset();
   }
