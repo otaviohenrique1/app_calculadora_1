@@ -17,12 +17,12 @@ class Ajuda extends StatelessWidget {
         ),
       ),
       actions: [
-        RaisedButton(
+        ElevatedButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          color: Colors.blue,
-          textColor: Colors.white,
+          // color: Colors.blue,
+          // textColor: Colors.white,
           child: Text(
             'Fechar',
           ),

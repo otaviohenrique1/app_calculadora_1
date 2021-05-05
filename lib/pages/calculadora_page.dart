@@ -119,20 +119,20 @@ class _CalculadoraPageState extends State<CalculadoraPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  RaisedButton(
+                  ElevatedButton(
                     child: Text(
                       'Calcular',
                       style: TextStyle(fontSize: 20),
                     ),
-                    color: Colors.blue,
-                    textColor: Colors.white,
+                    // color: Colors.blue,
+                    // textColor: Colors.white,
                     onPressed: () {
                       _calcular();
                     },
                   ),
-                  RaisedButton(
-                    color: Colors.red,
-                    textColor: Colors.white,
+                  ElevatedButton(
+                    // color: Colors.red,
+                    // textColor: Colors.white,
                     child: Text(
                       'Limpar',
                       style: TextStyle(fontSize: 20),
@@ -141,13 +141,13 @@ class _CalculadoraPageState extends State<CalculadoraPage> {
                       _resetForm();
                     },
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                     child: Text(
                       'Ajuda',
                       style: TextStyle(fontSize: 20),
                     ),
-                    color: Colors.green,
-                    textColor: Colors.white,
+                    // color: Colors.green,
+                    // textColor: Colors.white,
                     onPressed: () {
                       _ajuda(context);
                     },
@@ -185,13 +185,13 @@ class _CalculadoraPageState extends State<CalculadoraPage> {
 
   _ajuda(BuildContext context) {
     showDialog(
-      context: context,
-      child: Ajuda(
+      builder: (context) => Ajuda(
         texto: '''
           A----B
           C----X
           X=(B*C)/A''',
       ),
+      context: context,
     );
   }
 

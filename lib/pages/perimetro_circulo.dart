@@ -74,50 +74,51 @@ class _PerimetroCirculoState extends State<PerimetroCirculo> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                RaisedButton(
-                  onPressed: () {
-                    _calcular();
-                  },
-                  padding: EdgeInsets.symmetric(
-                    vertical: 15,
-                    horizontal: 25,
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _calcular();
+                    },
+                    child: Text(
+                      'Calcular',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    // color: Colors.blue,
+                    // textColor: Colors.white,
                   ),
-                  child: Text(
-                    'Calcular',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  color: Colors.blue,
-                  textColor: Colors.white,
                 ),
-                RaisedButton(
-                  onPressed: () {
-                    _resetForm();
-                  },
-                  padding: EdgeInsets.symmetric(
-                    vertical: 15,
-                    horizontal: 25,
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _resetForm();
+                    },
+                    child: Text(
+                      'Limpar',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    // color: Colors.red,
+                    // textColor: Colors.white,
                   ),
-                  child: Text(
-                    'Limpar',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  color: Colors.red,
-                  textColor: Colors.white,
                 ),
-                RaisedButton(
-                  onPressed: () {
-                    _ajuda(context);
-                  },
-                  padding: EdgeInsets.symmetric(
-                    vertical: 15,
-                    horizontal: 25,
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _ajuda(context);
+                    },
+                    style: ButtonStyle(),
+                    child: Text(
+                      'Ajuda',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    // color: Colors.green,
+                    // textColor: Colors.white,
                   ),
-                  child: Text(
-                    'Ajuda',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  color: Colors.green,
-                  textColor: Colors.white,
                 ),
               ],
             ),
@@ -146,10 +147,10 @@ class _PerimetroCirculoState extends State<PerimetroCirculo> {
 
   _ajuda(BuildContext context) {
     showDialog(
-      context: context,
-      child: Ajuda(
+      builder: (context) => Ajuda(
         texto: 'P=2*pi*r',
       ),
+      context: context,
     );
   }
 
