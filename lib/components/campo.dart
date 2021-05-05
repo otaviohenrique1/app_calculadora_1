@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CampoFormulario extends StatefulWidget {
   final String labelCampo;
-  final dynamic onCalback;
+  final dynamic onCallback;
   final TextInputType keyboardType;
   final String mensagemCampo;
 
@@ -11,7 +11,7 @@ class CampoFormulario extends StatefulWidget {
       this.labelCampo,
       this.mensagemCampo,
       this.keyboardType,
-      this.onCalback})
+      this.onCallback})
       : super(key: key);
 
   @override
@@ -32,7 +32,7 @@ class _CampoFormularioState extends State<CampoFormulario> {
             return widget.mensagemCampo;
           }
         },
-        onSaved: widget.onCalback,
+        onSaved: widget.onCallback,
       ),
     );
   }
